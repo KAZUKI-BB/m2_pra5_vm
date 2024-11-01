@@ -14,17 +14,13 @@ class AuthController extends Controller
 
     // ログイン処理とセッションの生成
     public function login(Request $request){
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = $request->only('email','password');
 
         if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
             return redirect()->intended('/admin');
         }else{
             return back()->withErrors([
-                'login' => 'ログイン情報が間違っています。'
+                'login' => 'ログイン情報が間違っています。',
             ]);
         }
     }
@@ -36,6 +32,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
