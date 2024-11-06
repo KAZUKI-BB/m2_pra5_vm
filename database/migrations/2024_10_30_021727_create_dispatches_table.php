@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('worker_id');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class Worker extends Model
     protected $fillable = ['name','email','password'];
 
     public function setPasswordAttribute($value){
-        $this->atributes['password'] = bcrypt($value);
+        $this->attributes['password'] = bcrypt($value);
     }
 
     public function dispatches(){

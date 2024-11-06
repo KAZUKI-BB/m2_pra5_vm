@@ -28,6 +28,10 @@ class WorkerController extends Controller
         return redirect()->route('workers.index')->with('success','人材が登録されました。');
     }
 
+    public function edit(Worker $worker){
+        return view('workers.edit', compact('worker'));
+    }
+
     public function update(Request $request, Worker $worker){
         $validated = $request->validate([
             'name' => 'required|string|max:255',
